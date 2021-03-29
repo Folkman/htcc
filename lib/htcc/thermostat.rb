@@ -106,7 +106,7 @@ module HTCC
     end
 
     def cool_setpoint_range
-      [min_cool_setpoint, max_cool_setpoint]
+      (min_cool_setpoint..max_cool_setpoint)
     end
 
     # Heating temperature setting
@@ -122,7 +122,7 @@ module HTCC
     end
 
     def heat_setpoint_range
-      [min_heat_setpoint, max_heat_setpoint]
+      (min_heat_setpoint..max_heat_setpoint)
     end
 
     def resume_schedule

@@ -1,4 +1,4 @@
-# HTCC (0.2.0)
+# HTCC (0.3.0)
 
 This gem is a Ruby client for the Honeywell Total Connect Comfort API.
 
@@ -185,7 +185,7 @@ thermostat.cool_setpoint = 32
 Get the cool setpoint range.
 ```ruby
 thermostat.cool_setpoint_range
-# => [50, 99]
+# => 50..99
 ```
 
 Get the temperature that is set for heating.
@@ -206,7 +206,7 @@ thermostat.heat_setpoint = 100
 Get the heat setpoint range.
 ```ruby
 thermostat.heat_setpoint_range
-# => [40, 90]
+# => 40..90
 ```
 
 Get the current hold status. Returns `:none`, `:temporary`, or `:permanent` depending on the capabilities of your device.

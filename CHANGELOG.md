@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0 (29-March-2021)
+* __Breaking changes:__
+  * Change `#cool_setpoint_range` and `#heat_setpoint_range` on `HTCC::Thermostat` to return a `Range` object for more flexibility (can use `min`, `max`, and `include?` now).
+
 ## 0.2.0 (29-March-2021)
 * __Breaking changes:__
   * Removed `#refresh_devices` method from `HTCC::Client` in favor of `#devices(true)` for consistency with `HTCC::Thermostat#status` method.
