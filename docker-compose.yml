@@ -1,0 +1,7 @@
+version: '3.9'
+
+services:
+  htcc:
+    build: .
+    working_dir: /htcc
+    command: ["./irb.sh"]
