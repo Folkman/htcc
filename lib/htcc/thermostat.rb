@@ -105,6 +105,10 @@ module HTCC
       change_setting(cool_setpoint: temp, hold: :temporary)
     end
 
+    def cool_setpoint_range
+      [min_cool_setpoint, max_cool_setpoint]
+    end
+
     # Heating temperature setting
     def heat_setpoint
       get_status
@@ -115,6 +119,10 @@ module HTCC
       raise_min_setpoint(min_heat_setpoint, temp) if temp < min_heat_setpoint
       raise_max_setpoint(max_heat_setpoint, temp) if temp > max_heat_setpoint
       change_setting(heat_setpoint: temp, hold: :temporary)
+    end
+
+    def heat_setpoint_range
+      [min_heat_setpoint, max_heat_setpoint]
     end
 
     def resume_schedule

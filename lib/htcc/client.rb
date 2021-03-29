@@ -8,14 +8,11 @@ module HTCC
     BASE_URL = 'https://mytotalconnectcomfort.com/portal'.freeze
     HEADERS  = { 'X-Requested-With': 'XMLHttpRequest' }.freeze
 
-    attr_reader :devices
-
     def initialize(username, password, debug: false, debug_output: nil)
       @debug = debug
       @debug_output = nil
       @devices = []
       login(username, password)
-      get_devices if logged_in?
     end
 
     def debug=(val)
@@ -26,22 +23,18 @@ module HTCC
       @logged_in
     end
 
-    def refresh_devices
-      @devices = []
-      get_devices
+    def devices(refresh = false)
+      return @devices unless @devices.empty? || refresh
+
+      @devices = get_devices if logged_in?
     end
 
     private
 
     def get_devices
-      resp = request(
-        '/Location/GetLocationListData',
-        method: 'post',
-        data: { 'page' => '1', 'filter' => '' }
-      )
+      resp = request('/Location/GetLocationListData', method: 'post', data: { 'page': '1', 'filter': '' })
       locations = ::JSON.parse(resp.body)
-      @devices = locations.flat_map { |loc| loc['Devices'] }
-      @devices.map! do |device|
+      locations.flat_map { |loc| loc['Devices'] }.map do |device|
         case device['DeviceType']
         when 24
           Thermostat.new(device, self)
