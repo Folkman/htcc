@@ -177,7 +177,7 @@ module HTCC
     private
 
     def get_status
-      return @status if @status && !@refresh
+      return @status unless @refresh || @status.empty?
 
       resp = @client.send(:request, "/Device/CheckDataSession/#{id}?_=#{Time.now.to_i}")
       @status = JSON.parse(resp.body)
