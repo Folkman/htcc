@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1 (29-March-2021)
+* __New Features:__
+  * Add `#hold_until` and `#hold_until=` to `HTCC::Thermostat` for getting/setting temporary holds until a given time.
+
 ## 0.3.0 (29-March-2021)
 * __Breaking changes:__
   * Change `#cool_setpoint_range` and `#heat_setpoint_range` on `HTCC::Thermostat` to return a `Range` object for more flexibility (can use `min`, `max`, and `include?` now).

@@ -1,4 +1,5 @@
-# HTCC (0.3.0)
+# HTCC
+[![Gem Version](https://badge.fury.io/rb/htcc.svg)](https://badge.fury.io/rb/htcc)
 
 This gem is a Ruby client for the Honeywell Total Connect Comfort API.
 
@@ -12,8 +13,8 @@ Currently, settings and scheduling are a work in progress.
 You can also test it out by forking this respository and running `docker-compose run htcc`.
 ## Basic Usage
 ```ruby
-htcc = HTCC::Client.new('login@example.com', 'password')
-# => #<HTCC::Client: 0x0000abc123 @debug=false...>
+htcc = HTCC::Client.new('tcc_login@example.com', 'password')
+# => #<HTCC::Client:0x0000abc123 @debug=false...>
 ```
 
 Get first device.
@@ -43,7 +44,7 @@ thermostat.heat_setpoint = 72
 ## `HTCC::Client` Usage
 ```ruby
 htcc = HTCC::Client.new('tcc_login@example.com', 'password', debug: true, debug_output: $stdout)
-# => #<HTCC::Client: 0x0000abc123 @debug=true...>
+# => #<HTCC::Client:0x0000abc123 @debug=true...>
 ```
 `debug` determines whether to display the HTTP request/response data (boolean, default: `false`)
 
@@ -222,6 +223,21 @@ thermostat.hold = :temporary
 
 thermostat.hold = :permanent
 # => HTCC::Thermostat::HoldError (Unknown mode: :permanent. Allowed modes: [:none, :temporary])
+```
+
+Get the time a temporary hold ends. Returns a 24-hour formatted string (HH:MM). If the current hold is `:permanent`, this time is ignored unless the hold is changed to `:temporary`.
+```ruby
+thermostat.hold_until
+# => "22:15"
+```
+
+Set a temporary hold until a given time. Time must be in a zero-padded 24-hour format (HH:MM). Time begin at 00:00 (midnight) to 23:45. Minutes must be in quarter hours (:00, :15, :30, :45). Returns an `HTCC::Thermostat::HoldError` if given time is not valid.
+```ruby
+thermostat.hold_until = '05:45'
+# => "05:45"
+
+thermostat.hold_until = '05:46'
+# => HTCC::Thermostat::HoldError (Unknown hold time: "05:46". Valid times are from 00:00 - 23:45 in 15 minute intervals.)
 ```
 
 Clear out any holds and resume heating/cooling schedule (same as `thermostat.hold = :none`).

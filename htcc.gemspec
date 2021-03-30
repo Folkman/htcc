@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'htcc'
-  s.version     = '0.3.0'
+  s.version     = '0.3.1'
   s.summary     = "A Ruby client for the Honeywell Total Connect Comfort API"
   s.description = "This gem can be used to control Honeywell thermostats that use the Total Connect Comfort platform."
   s.author      = 'Lee Folkman'
