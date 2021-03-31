@@ -19,7 +19,7 @@ htcc = HTCC::Client.new('tcc_login@example.com', 'password')
 
 Get first device.
 ```ruby
-thermostat = httc.devices.first
+thermostat = htcc.devices.first
 # => #<HTCC::Thermostat:0x0000abc123 @info={"DeviceID"=>...>
 ```
 
